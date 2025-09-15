@@ -102,5 +102,6 @@ var collectableList = {
   spikes: {image: "images/collectables/spikes.png"},
   shoes: {image: "images/collectables/shoes.png" },
   batton: {image: "images/collectables/batton.png"},
-  hurdle: {image: "images/projectile/hurdle.jpg"}
+  hurdle: {image: "images/projectile/hurdle.jpg"},
+  track: {image: "images/backround/track.jpg"}
 };
