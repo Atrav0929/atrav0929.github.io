@@ -98,8 +98,9 @@ var collectableList = {
   kennedi: { image: "images/collectables/kennedi-head.png" },
   max: { image: "images/collectables/max-head.png" },
   steve: { image: "images/collectables/steve-head.png" },
-  medal: {image: "images/collectables/medal.jpg"},
-  spikes: {image: "images/collectables/spikes.jpg"},
-  shoes: {image: "images/collectables/shoes.jpg" },
-  batton: {image: "images/collectables/batton.jpg"},
+  medal: {image: "images/collectables/medal.png"},
+  spikes: {image: "images/collectables/spikes.png"},
+  shoes: {image: "images/collectables/shoes.png" },
+  batton: {image: "images/collectables/batton.png"},
+  hurdle: {image: "images/projectile/hurdle.jpg"}
 };
