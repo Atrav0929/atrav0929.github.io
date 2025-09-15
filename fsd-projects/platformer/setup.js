@@ -100,6 +100,6 @@ var collectableList = {
   steve: { image: "images/collectables/steve-head.png" },
   medal: {image: "images/collectables/medal.jpg"},
   spikes: {image: "images/collectables/spikes.jpg"},
-  shoes: {image: "image/collectables/shoes.jpg" },
+  shoes: {image: "images/collectables/shoes.jpg" },
   batton: {image: "images/collectables/batton.jpg"},
 };
