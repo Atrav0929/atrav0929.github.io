@@ -19,7 +19,7 @@ var runLevels = function (window) {
     // TODOs 5 through 11 go here
     // BEGIN EDITING YOUR CODE HERE
     var hitZoneSize = 25;
-    var damageFromObstacle = 10;
+    var damageFromObstacle = 20;
 
     function createSawBlade(x, y) {
       var sawBladeHitZone = game.createObstacle(
@@ -35,16 +35,10 @@ var runLevels = function (window) {
       sawBladeHitZone.addChild(obstacleImage);
     }
 
-    createSawBlade(400, 250);
-    createSawBlade(800, groundY);
-    createSawBlade(1200, 250);
-    createSawBlade(1600, 300);
-    createSawBlade(2000, 300);
-
     function createEnemy(x, y) {
       var enemy = game.createGameItem("enemy", 25);
       var enemyImage = draw.bitmap("img/tackle.png");
-      enemyImage.x = -25;
+      enemyImage.x = -70;
       enemyImage.y = -25;
       enemy.addChild(enemyImage);
       enemy.x = x;
@@ -52,7 +46,6 @@ var runLevels = function (window) {
       game.addGameItem(enemy);
 
       enemy.velocityX = -2.2;
-      enemy.rotationalVelocity = 8;
 
       enemy.onPlayerCollision = function () {
         game.changeIntegrity(-10);
@@ -64,17 +57,11 @@ var runLevels = function (window) {
       };
     }
 
-    createEnemy(600, groundY - 40);
-    createEnemy(1000, groundY - 50);
-    createEnemy(1300, groundY - 60);
-    createEnemy(1700, groundY - 45);
-    createEnemy(1900, groundY - 55);
-
     function createReward(x, y, image) {
       var reward = game.createGameItem("reward", 25);
       var rewardImage = draw.bitmap(image);
-      rewardImage.x = -25;
-      rewardImage.y = -25;
+      rewardImage.x = -60;
+      rewardImage.y = -15;
       reward.addChild(rewardImage);
       reward.x = x;
       reward.y = y;
@@ -83,8 +70,8 @@ var runLevels = function (window) {
       reward.velocityX = -1.5;
 
       reward.onPlayerCollision = function () {
-        game.increaseScore(50);
-        game.changeIntegrity(10);
+        game.increaseScore(150);
+        game.changeIntegrity(30);
         reward.fadeOut();
       };
 
@@ -93,22 +80,43 @@ var runLevels = function (window) {
       };
     }
 
+    function createMarker() {
+      var endMarker = game.createGameItem("endMarker", 50);
+      var endMarkerImage = draw.bitmap("img/ball.png");
+      endMarkerImage.x = -70;
+      endMarkerImage.y = -70;
+      endMarker.addChild(endMarkerImage);
+      endMarker.x = 1600;
+      endMarker.y = groundY - 100;
+      game.addGameItem(endMarker);
+
+      endMarker.velocityX = -1.05;
+
+      endMarker.onPlayerCollision = function () {
+        startLevel();
+      };
+
+      endMarker.onProjectileCollision = function () {
+        startLevel();
+      };
+    }
+
+    createSawBlade(400, 250);
+    createSawBlade(800, groundY);
+    createSawBlade(1200, 250);
+    createSawBlade(1600, 300);
+    createSawBlade(2000, 300);
+
+    createEnemy(600, groundY - 40);
+    createEnemy(1000, groundY - 50);
+    createEnemy(1300, groundY - 60);
+    createEnemy(1700, groundY - 45);
+    createEnemy(1900, groundY - 55);
+
     createReward(1800, groundY - 50, "img/Super.png");
-    
 
-   
-    var endMarker = game.createGameItem("endMarker", 50);
-    var endMarkerImage = draw.bitmap("img/ball.png");
-    endMarkerImage.x = -70;
-    endMarkerImage.y = -70;
-    endMarker.addChild(endMarkerImage);
-    endMarker.x = 1600;
-    endMarker.y = groundY - 100;
-    game.addGameItem(endMarker);
+    createMarker();
 
-    endMarker.velocityX = -1.05;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-    
     function startLevel() {
       // TODO 13 goes below here
 

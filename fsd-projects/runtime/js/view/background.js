@@ -66,7 +66,13 @@ var background = function (window) {
       // TODO 4: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
       for (var i = 0; i < 5; ++i) {
         var buildingHeight = 150 + Math.random() * 300;
-        var colors = ["#ff9100ff", "#ffb700ff", "#ffbf00ff", "#ff9100ff", "#ffaa00ff"];
+        var colors = [
+          "#ff9100ff",
+          "#ffb700ff",
+          "#ffbf00ff",
+          "#ff9100ff",
+          "#ffaa00ff",
+        ];
         var buildingColor = colors[i % colors.length];
         var building = draw.rect(
           75,
@@ -97,12 +103,19 @@ var background = function (window) {
       var groundY = ground.y;
 
       // TODO 3: Part 2 - Move the tree!
-      field.x = field.x + 1;
+      field.x = field.x - 1;
 
       if (field.x < -200) {
         field.x = canvasWidth;
       }
       // TODO 4: Part 2 - Parallax
+      for (var i = 0; i < buildings.length; i++) {
+        var anyBuilding = buildings[i];
+        anyBuilding.x = anyBuilding.x - 1.5;
+        if (anyBuilding.x < -75) {
+          anyBuilding.x = canvasWidth;
+        }
+      }
     } // end of update function - DO NOT DELETE
 
     /* Make a createjs Container for the background and let it know about the render and upate functions*/
