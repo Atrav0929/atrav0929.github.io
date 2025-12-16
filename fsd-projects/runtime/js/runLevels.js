@@ -14,7 +14,7 @@ var runLevels = function (window) {
     var levelData = window.opspark.levelData;
 
     // set this to true or false depending on if you want to see hitzones
-    game.setDebugMode(true);
+    game.setDebugMode(false);
 
     // TODOs 5 through 11 go here
     // BEGIN EDITING YOUR CODE HERE
@@ -33,6 +33,7 @@ var runLevels = function (window) {
       obstacleImage.x = -25;
       obstacleImage.y = -15;
       sawBladeHitZone.addChild(obstacleImage);
+     
     }
 
     function createEnemy(x, y) {
@@ -45,7 +46,7 @@ var runLevels = function (window) {
       enemy.y = y;
       game.addGameItem(enemy);
 
-      enemy.velocityX = -2.2;
+      enemy.velocityX = -2.8;
 
       enemy.onPlayerCollision = function () {
         game.changeIntegrity(-10);
@@ -67,7 +68,7 @@ var runLevels = function (window) {
       reward.y = y;
       game.addGameItem(reward);
 
-      reward.velocityX = -1.5;
+      reward.velocityX = -2.0;
 
       reward.onPlayerCollision = function () {
         game.increaseScore(150);
@@ -80,45 +81,45 @@ var runLevels = function (window) {
       };
     }
 
-    function createMarker() {
+    function createMarker(x, y) {
       var endMarker = game.createGameItem("endMarker", 50);
       var endMarkerImage = draw.bitmap("img/ball.png");
-      endMarkerImage.x = -70;
-      endMarkerImage.y = -70;
+      endMarkerImage.x = -65;
+      endMarkerImage.y = -35;
       endMarker.addChild(endMarkerImage);
-      endMarker.x = 1600;
-      endMarker.y = groundY - 100;
+      endMarker.x = x;
+      endMarker.y = y;
       game.addGameItem(endMarker);
 
-      endMarker.velocityX = -1.05;
+      endMarker.velocityX = -1.5;
 
       endMarker.onPlayerCollision = function () {
         startLevel();
+        endMarker.fadeOut();
       };
 
       endMarker.onProjectileCollision = function () {
         startLevel();
-      };
+        endMarker.fadeOut();
+      }
     }
-
-    createSawBlade(400, 250);
-    createSawBlade(800, groundY);
-    createSawBlade(1200, 250);
-    createSawBlade(1600, 300);
-    createSawBlade(2000, 300);
-
-    createEnemy(600, groundY - 40);
-    createEnemy(1000, groundY - 50);
-    createEnemy(1300, groundY - 60);
-    createEnemy(1700, groundY - 45);
-    createEnemy(1900, groundY - 55);
-
-    createReward(1800, groundY - 50, "img/Super.png");
-
-    createMarker();
 
     function startLevel() {
       // TODO 13 goes below here
+      var level = levelData[currentLevel];
+      var levelObjects = level.gameItems;
+      for (var i = 0; i < levelObjects.length; i++) {
+        var obj = levelObjects[i];
+        if (obj.type === "sawblade") {
+          createSawBlade(obj.x, obj.y);
+        } else if (obj.type === "enemy") {
+          createEnemy(obj.x, obj.y);
+        } else if (obj.type === "reward") {
+          createReward(obj.x, obj.y, "img/Super.png");
+        } else if (obj.type === "endMarker") {
+          createMarker(obj.x, obj.y);
+        }
+      }
 
       //////////////////////////////////////////////
       // DO NOT EDIT CODE BELOW HERE
